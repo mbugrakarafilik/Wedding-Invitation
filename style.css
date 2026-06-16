@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f171e 0%, #17222c 100%);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Arka plan Efekti */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, #d4af37 0%, rgba(212,175,55,0) 70%);
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+    0% { transform: translateY(105vh) scale(0); opacity: 0; }
+    50% { opacity: 0.6; }
+    100% { transform: translateY(-5vh) scale(1); opacity: 0; }
+}
+
+/* Ana Sahne Kapsayıcısı */
+.main-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* ZARF BOYUTLARI (Ekranı dolduran ama taşmayan esnek yapı) */
+.envelope-wrapper {
+    position: relative;
+    width: 420px;
+    height: 280px;
+    background-color: #1a252f;
+    cursor: pointer;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    transition: transform 0.4s ease;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Zarf Katlamaları (Responsive borderlar) */
+.top-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 210px solid transparent;
+    border-right: 210px solid transparent;
+    border-top: 150px solid #233241;
+    transform-origin: top;
+    transition: transform 0.4s ease 0.2s, z-index 0.2s ease 0.2s;
+    z-index: 4;
+}
+
+.side-flaps {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 210px solid #1f2d3a;
+    border-top: 140px solid transparent;
+    border-bottom: 140px solid transparent;
+    z-index: 3;
+}
+
+.front-flap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 210px solid transparent;
+    border-right: 210px solid transparent;
+    border-bottom: 150px solid #28394a;
+    z-index: 3;
+}
+
+/* Balmumu Mühür */
+.gold-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 55px;
+    height: 55px;
+    background: radial-gradient(circle, #f3e0aa 0%, #d4af37 100%);
+    border-radius: 50%;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease;
+}
+.gold-seal span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #4a3600;
+}
+
+/* DAVETİYE KARTI (Zarfın içindeki şık kağıt) */
+.wedding-card {
+    position: absolute;
+    background: #ffffff;
+    width: 390px;
+    height: 250px;
+    left: 15px;
+    top: 15px;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.card-inner {
+    border: 2px solid #d4af37;
+    width: 100%;
+    height: 100%;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.names {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 2.8rem;
+    color: #1a252f;
+    text-align: center;
+    line-height: 1;
+}
+
+.divider {
+    color: #d4af37;
+    font-size: 1rem;
+    margin: -5px 0;
+}
+
+.invitation-text {
+    font-size: 0.8rem;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 300px;
+}
+
+.wedding-details {
+    display: flex;
+    gap: 20px;
+    font-size: 0.75rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* İstediğin Aşağı Alınan Buton Alanı */
+.action-zone {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px; 
+}
+
+.maps-btn {
+    background-color: #1a252f;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 24px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background 0.2s;
+    letter-spacing: 0.5px;
+}
+.maps-btn:hover {
+    background-color: #d4af37;
+    color: #1a252f;
+}
+
+/* İpucu Yazısı */
+.hint-text {
+    margin-top: 25px;
+    color: #d4af37;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+/* =======================================================
+   AÇILMA DURUMU (KAYMA VE TAŞMA YAPMAZ, MERKEZİDİR)
+   ======================================================= */
+
+.envelope-wrapper.open .top-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-wrapper.open .gold-seal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Kartın yukarı çıkış mesafesi zarf sınırlarına göre oranlandı */
+.envelope-wrapper.open .wedding-card {
+    transform: translateY(-160px); /* Üst üste binmeden tam yukarı kayar */
+    height: 300px; /* İçerik rahatlasın diye boyu hafif uzar */
+    z-index: 5;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* =======================================================
+   MOBIL UYUMLULUK (EKRAN KÜÇÜLÜNCE OTOMATİK KÜÇÜLÜR)
+   ======================================================= */
+@media (max-width: 440px) {
+    .envelope-wrapper { width: 300px; height: 200px; }
+    .top-flap { border-left-width: 150px; border-right-width: 150px; border-top-width: 110px; }
+    .side-flaps { border-left-width: 150px; border-top-width: 100px; border-bottom-width: 100px; }
+    .front-flap { border-left-width: 150px; border-right-width: 150px; border-bottom-width: 110px; }
+    
+    .wedding-card { width: 280px; height: 180px; left: 10px; top: 10px; }
+    .envelope-wrapper.open .wedding-card { transform: translateY(-110px); height: 220px; }
+    
+    .names { font-size: 2rem; }
+    .invitation-text { font-size: 0.7rem; max-width: 220px; }
+    .wedding-details { font-size: 0.65rem; gap: 10px; }
+    .maps-btn { padding: 6px 16px; font-size: 0.7rem; }
+}
