@@ -4,256 +4,558 @@
     box-sizing: border-box;
 }
 
+:root {
+    --ink: #1a252f;
+    --navy: #16222d;
+    --gold: #c59b36;
+    --gold-light: #f2dfaa;
+    --paper: #fffaf1;
+    --sage: #7f9475;
+    --rose: #c98f86;
+}
+
+html,
 body {
-    background: linear-gradient(135deg, #0f171e 0%, #17222c 100%);
+    min-height: 100%;
+}
+
+body {
+    background: linear-gradient(135deg, #fff7ec 0%, #f4dfcf 100%);
     font-family: 'Montserrat', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: var(--ink);
     overflow: hidden;
 }
 
-/* Arka plan Efekti */
+button,
+a {
+    font: inherit;
+}
+
 .particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    position: fixed;
+    inset: 0;
     pointer-events: none;
-    z-index: 1;
-}
-.particle {
-    position: absolute;
-    background: radial-gradient(circle, #d4af37 0%, rgba(212,175,55,0) 70%);
-    border-radius: 50%;
-    animation: floatUp linear infinite;
-}
-@keyframes floatUp {
-    0% { transform: translateY(105vh) scale(0); opacity: 0; }
-    50% { opacity: 0.6; }
-    100% { transform: translateY(-5vh) scale(1); opacity: 0; }
-}
-
-/* Ana Sahne Kapsayıcısı */
-.main-wrapper {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
-}
-
-/* ZARF BOYUTLARI (Ekranı dolduran ama taşmayan esnek yapı) */
-.envelope-wrapper {
-    position: relative;
-    width: 420px;
-    height: 280px;
-    background-color: #1a252f;
-    cursor: pointer;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-    transition: transform 0.4s ease;
-}
-
-.envelope {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-/* Zarf Katlamaları (Responsive borderlar) */
-.top-flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 210px solid transparent;
-    border-right: 210px solid transparent;
-    border-top: 150px solid #233241;
-    transform-origin: top;
-    transition: transform 0.4s ease 0.2s, z-index 0.2s ease 0.2s;
     z-index: 4;
 }
 
-.side-flaps {
+.particle {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 210px solid #1f2d3a;
-    border-top: 140px solid transparent;
-    border-bottom: 140px solid transparent;
-    z-index: 3;
-}
-
-.front-flap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 210px solid transparent;
-    border-right: 210px solid transparent;
-    border-bottom: 150px solid #28394a;
-    z-index: 3;
-}
-
-/* Balmumu Mühür */
-.gold-seal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    width: 55px;
-    height: 55px;
-    background: radial-gradient(circle, #f3e0aa 0%, #d4af37 100%);
+    background: radial-gradient(circle, rgba(197, 155, 54, 0.45) 0%, rgba(197, 155, 54, 0) 70%);
     border-radius: 50%;
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: opacity 0.3s ease;
-}
-.gold-seal span {
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #4a3600;
+    animation: floatUp linear infinite;
 }
 
-/* DAVETİYE KARTI (Zarfın içindeki şık kağıt) */
-.wedding-card {
+@keyframes floatUp {
+    0% {
+        transform: translateY(105vh) scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.55;
+    }
+    100% {
+        transform: translateY(-5vh) scale(1);
+        opacity: 0;
+    }
+}
+
+.page-shell {
+    min-height: 200vh;
+    transition: transform 900ms cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
+}
+
+body.invitation-open .page-shell {
+    transform: translateY(-100vh);
+}
+
+.screen {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 24px;
+}
+
+.intro-screen {
+    background:
+        radial-gradient(circle at 18% 18%, rgba(201, 143, 134, 0.2), transparent 27%),
+        radial-gradient(circle at 84% 22%, rgba(127, 148, 117, 0.18), transparent 30%),
+        linear-gradient(135deg, #fff9f0 0%, #f7e4d4 54%, #efe7d5 100%);
+}
+
+.intro-screen::before {
+    content: "";
     position: absolute;
-    background: #ffffff;
-    width: 390px;
-    height: 250px;
-    left: 15px;
-    top: 15px;
-    border-radius: 4px;
-    padding: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    width: min(76vw, 620px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(197, 155, 54, 0.24);
+    border-radius: 50%;
+    transform: translateY(-24px);
+}
+
+.intro-screen::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 34vh;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.34), transparent);
+    pointer-events: none;
+}
+
+.envelope-wrapper {
+    position: relative;
+    width: min(520px, calc(100vw - 44px));
+    aspect-ratio: 3 / 2;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    filter: drop-shadow(0 34px 42px rgba(102, 96, 90, 0.26));
+    transition: transform 260ms ease, filter 260ms ease;
     z-index: 2;
 }
 
-.card-inner {
-    border: 2px solid #d4af37;
-    width: 100%;
-    height: 100%;
-    padding: 20px 15px;
+.envelope-wrapper:hover {
+    transform: translateY(-6px) rotate(-0.3deg);
+    filter: drop-shadow(0 42px 54px rgba(102, 96, 90, 0.32));
+}
+
+.envelope-wrapper:focus-visible {
+    outline: 3px solid rgba(197, 155, 54, 0.5);
+    outline-offset: 10px;
+}
+
+.envelope {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 24% 12%, rgba(255, 255, 255, 0.98), transparent 24%),
+        linear-gradient(145deg, #ffffff 0%, #f2eee8 48%, #d9d2c8 100%);
+    border: 1px solid rgba(155, 148, 139, 0.34);
+    border-radius: 9px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.82),
+        inset 0 -24px 42px rgba(117, 108, 98, 0.12);
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(108deg, rgba(255, 255, 255, 0.4) 0 1px, transparent 1px 8px),
+        repeating-linear-gradient(24deg, rgba(124, 116, 107, 0.045) 0 1px, transparent 1px 12px);
+    opacity: 0.72;
+    z-index: 8;
+    pointer-events: none;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    inset: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    border-radius: 6px;
+    z-index: 9;
+    pointer-events: none;
+}
+
+.back-paper,
+.top-flap,
+.side-flaps,
+.front-flap,
+.bow-ribbon,
+.gold-seal {
+    position: absolute;
+    display: block;
+}
+
+.back-paper {
+    inset: 0;
+    background: linear-gradient(180deg, #fbfaf7 0%, #e8e2d9 100%);
+    z-index: 1;
+}
+
+.side-flaps {
+    inset: 0;
+    clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 50% 50%, 0 100%);
+    background: linear-gradient(90deg, rgba(214, 207, 198, 0.95), rgba(252, 250, 246, 0.98) 50%, rgba(205, 197, 187, 0.95));
+    z-index: 2;
+}
+
+.front-flap {
+    inset: 0;
+    clip-path: polygon(0 100%, 50% 42%, 100% 100%);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.46), transparent 30%),
+        linear-gradient(145deg, #f6f2eb 0%, #ddd6cc 62%, #c8bfb4 100%);
+    z-index: 3;
+}
+
+.front-flap::before,
+.front-flap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.74;
+}
+
+.front-flap::before {
+    background: linear-gradient(37deg, transparent 49.4%, rgba(255, 255, 255, 0.92) 50%, transparent 50.7%);
+}
+
+.front-flap::after {
+    background: linear-gradient(-37deg, transparent 49.4%, rgba(126, 117, 108, 0.17) 50%, transparent 50.7%);
+}
+
+.top-flap {
+    inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 57%);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(232, 227, 219, 0.92)),
+        linear-gradient(135deg, #ffffff 0%, #e8e2da 100%);
+    z-index: 4;
+    filter: drop-shadow(0 5px 5px rgba(127, 118, 108, 0.13));
+}
+
+.top-flap::before,
+.top-flap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.top-flap::before {
+    background: linear-gradient(32deg, transparent 49.3%, rgba(134, 125, 116, 0.2) 50%, transparent 50.8%);
+}
+
+.top-flap::after {
+    background: linear-gradient(-32deg, transparent 49.3%, rgba(255, 255, 255, 0.86) 50%, transparent 50.8%);
+}
+
+.bow-ribbon {
+    top: 64%;
+    left: 50%;
+    width: 124px;
+    height: 46px;
+    transform: translate(-50%, -50%);
+    background:
+        radial-gradient(circle at 50% 50%, #f8f1e8 0 9px, #b8a898 10px 13px, transparent 14px),
+        linear-gradient(90deg, transparent 0 38%, rgba(174, 159, 144, 0.5) 39% 42%, transparent 43% 57%, rgba(174, 159, 144, 0.5) 58% 61%, transparent 62% 100%);
+    z-index: 9;
+    pointer-events: none;
+}
+
+.bow-ribbon::before,
+.bow-ribbon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 31px;
+    background:
+        radial-gradient(circle at 32% 32%, rgba(255, 255, 255, 0.78), transparent 26%),
+        linear-gradient(135deg, #eee6dc 0%, #cfc4b8 55%, #a99b8d 100%);
+    border: 1px solid rgba(151, 138, 124, 0.34);
+    box-shadow: 0 8px 12px rgba(116, 106, 96, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.bow-ribbon::before {
+    right: 50%;
+    transform: translate(2px, -50%) skewY(-10deg) rotate(-7deg);
+    border-radius: 50% 42% 48% 45%;
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.bow-ribbon::after {
+    left: 50%;
+    transform: translate(-2px, -50%) skewY(10deg) rotate(7deg);
+    border-radius: 42% 50% 45% 48%;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.gold-seal {
+    top: 55.5%;
+    left: 50%;
+    width: 66px;
+    height: 66px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 36% 28%, #ffffff 0%, #f5f0e8 50%, #ded5c8 100%);
+    border: 1px solid rgba(170, 151, 116, 0.46);
+    border-radius: 50%;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    box-shadow:
+        0 12px 20px rgba(119, 109, 100, 0.2),
+        inset 0 0 0 5px rgba(255, 255, 255, 0.52),
+        inset 0 0 18px rgba(143, 132, 119, 0.12);
+}
+
+.gold-seal span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2a2927;
+    letter-spacing: 0.7px;
+}
+
+.hint-text {
+    position: absolute;
+    top: calc(50% + min(210px, 39vw));
+    color: #6f665d;
+    font-size: clamp(0.98rem, 2.2vw, 1.18rem);
+    font-weight: 700;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    animation: pulse 2s infinite;
+    z-index: 2;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.52;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+.invitation-screen {
+    background:
+        linear-gradient(rgba(255, 250, 241, 0.86), rgba(255, 250, 241, 0.92)),
+        radial-gradient(circle at 14% 18%, rgba(201, 143, 134, 0.28), transparent 24%),
+        radial-gradient(circle at 86% 14%, rgba(127, 148, 117, 0.22), transparent 28%),
+        linear-gradient(135deg, #fffaf1 0%, #f5ead8 100%);
+}
+
+.invitation-page {
+    position: relative;
+    width: min(720px, calc(100vw - 32px));
+    min-height: min(760px, calc(100vh - 32px));
+    padding: clamp(38px, 7vw, 78px) clamp(24px, 7vw, 82px);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 2.8vh, 26px);
+    text-align: center;
+    background:
+        linear-gradient(90deg, rgba(197, 155, 54, 0.45), rgba(197, 155, 54, 0.05), rgba(197, 155, 54, 0.45)) top / 100% 2px no-repeat,
+        linear-gradient(90deg, rgba(197, 155, 54, 0.45), rgba(197, 155, 54, 0.05), rgba(197, 155, 54, 0.45)) bottom / 100% 2px no-repeat,
+        rgba(255, 253, 248, 0.72);
+    border: 1px solid rgba(197, 155, 54, 0.36);
+    box-shadow: 0 26px 80px rgba(92, 64, 37, 0.14);
+}
+
+.invitation-page::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(197, 155, 54, 0.26);
+    pointer-events: none;
+}
+
+.corner-flower {
+    position: absolute;
+    width: 150px;
+    aspect-ratio: 1;
+    opacity: 0.58;
+    pointer-events: none;
+}
+
+.corner-flower::before,
+.corner-flower::after {
+    content: "";
+    position: absolute;
+    inset: 18%;
+    border-radius: 58% 42% 60% 40%;
+    background:
+        radial-gradient(circle at 40% 42%, rgba(201, 143, 134, 0.8) 0 12%, transparent 13%),
+        radial-gradient(circle at 62% 46%, rgba(242, 199, 188, 0.8) 0 18%, transparent 19%),
+        radial-gradient(circle at 48% 64%, rgba(201, 143, 134, 0.7) 0 15%, transparent 16%);
+}
+
+.corner-flower::after {
+    inset: 8%;
+    border: solid rgba(127, 148, 117, 0.72);
+    border-width: 0 0 2px 2px;
+    border-radius: 0 0 0 100%;
+    background: none;
+}
+
+.corner-flower-left {
+    left: 22px;
+    top: 22px;
+}
+
+.corner-flower-right {
+    right: 22px;
+    bottom: 22px;
+    transform: rotate(180deg);
+}
+
+.eyebrow {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
 .names {
     font-family: 'Pinyon Script', cursive;
-    font-size: 2.8rem;
-    color: #1a252f;
-    text-align: center;
-    line-height: 1;
+    font-size: clamp(4rem, 12vw, 7.4rem);
+    line-height: 0.95;
+    font-weight: 400;
+    color: var(--ink);
 }
 
 .divider {
-    color: #d4af37;
-    font-size: 1rem;
-    margin: -5px 0;
+    color: var(--gold);
+    font-size: 1.2rem;
 }
 
 .invitation-text {
-    font-size: 0.8rem;
-    color: #555;
-    text-align: center;
-    line-height: 1.5;
-    max-width: 300px;
+    max-width: 520px;
+    color: #5e554f;
+    font-size: clamp(0.95rem, 2.4vw, 1.08rem);
+    line-height: 1.8;
 }
 
 .wedding-details {
-    display: flex;
-    gap: 20px;
-    font-size: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    width: min(430px, 100%);
+    gap: 12px;
+}
+
+.detail-item {
+    min-height: 78px;
+    display: grid;
+    place-items: center;
+    gap: 4px;
+    padding: 14px 12px;
+    border-top: 1px solid rgba(197, 155, 54, 0.35);
+    border-bottom: 1px solid rgba(197, 155, 54, 0.35);
     color: #2c3e50;
-    font-weight: 500;
+    font-size: 0.96rem;
+    font-weight: 600;
 }
 
-/* İstediğin Aşağı Alınan Buton Alanı */
-.action-zone {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 5px; 
-}
-
-.maps-btn {
-    background-color: #1a252f;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 24px;
-    font-size: 0.75rem;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: background 0.2s;
-    letter-spacing: 0.5px;
-}
-.maps-btn:hover {
-    background-color: #d4af37;
-    color: #1a252f;
-}
-
-/* İpucu Yazısı */
-.hint-text {
-    margin-top: 25px;
-    color: #d4af37;
-    font-size: 0.8rem;
+.detail-label {
+    color: var(--sage);
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
     letter-spacing: 2px;
-    animation: pulse 2s infinite;
+    text-transform: uppercase;
 }
-@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-/* =======================================================
-   AÇILMA DURUMU (KAYMA VE TAŞMA YAPMAZ, MERKEZİDİR)
-   ======================================================= */
-
-.envelope-wrapper.open .top-flap {
-    transform: rotateX(180deg);
+.maps-btn,
+.return-btn {
+    position: relative;
     z-index: 1;
 }
 
-.envelope-wrapper.open .gold-seal {
-    opacity: 0;
-    pointer-events: none;
+.maps-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 26px;
+    background-color: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-/* Kartın yukarı çıkış mesafesi zarf sınırlarına göre oranlandı */
-.envelope-wrapper.open .wedding-card {
-    transform: translateY(-160px); /* Üst üste binmeden tam yukarı kayar */
-    height: 300px; /* İçerik rahatlasın diye boyu hafif uzar */
-    z-index: 5;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+.maps-btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--gold);
+    color: var(--ink);
 }
 
-/* =======================================================
-   MOBIL UYUMLULUK (EKRAN KÜÇÜLÜNCE OTOMATİK KÜÇÜLÜR)
-   ======================================================= */
-@media (max-width: 440px) {
-    .envelope-wrapper { width: 300px; height: 200px; }
-    .top-flap { border-left-width: 150px; border-right-width: 150px; border-top-width: 110px; }
-    .side-flaps { border-left-width: 150px; border-top-width: 100px; border-bottom-width: 100px; }
-    .front-flap { border-left-width: 150px; border-right-width: 150px; border-bottom-width: 110px; }
-    
-    .wedding-card { width: 280px; height: 180px; left: 10px; top: 10px; }
-    .envelope-wrapper.open .wedding-card { transform: translateY(-110px); height: 220px; }
-    
-    .names { font-size: 2rem; }
-    .invitation-text { font-size: 0.7rem; max-width: 220px; }
-    .wedding-details { font-size: 0.65rem; gap: 10px; }
-    .maps-btn { padding: 6px 16px; font-size: 0.7rem; }
+.return-btn {
+    border: 0;
+    background: transparent;
+    color: #7a6b5f;
+    cursor: pointer;
+    font-size: 0.78rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+@media (max-width: 560px) {
+    .screen {
+        padding: 16px;
+    }
+
+    .hint-text {
+        top: calc(50% + 41vw);
+        max-width: 310px;
+        text-align: center;
+        line-height: 1.6;
+        font-size: 0.94rem;
+        letter-spacing: 1.6px;
+    }
+
+    .bow-ribbon {
+        top: 65%;
+        width: 98px;
+        height: 36px;
+    }
+
+    .bow-ribbon::before,
+    .bow-ribbon::after {
+        width: 40px;
+        height: 25px;
+    }
+
+    .gold-seal {
+        width: 56px;
+        height: 56px;
+    }
+
+    .gold-seal span {
+        font-size: 0.74rem;
+    }
+
+    .invitation-page {
+        min-height: calc(100vh - 24px);
+        gap: 15px;
+        padding: 44px 24px;
+    }
+
+    .corner-flower {
+        width: 108px;
+    }
+
+    .corner-flower-left {
+        left: 10px;
+        top: 10px;
+    }
+
+    .corner-flower-right {
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .wedding-details {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .detail-item {
+        min-height: 66px;
+    }
 }

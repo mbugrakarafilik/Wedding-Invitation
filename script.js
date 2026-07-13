@@ -1,37 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const envelopeWrapper = document.getElementById('envelopeWrapper');
-    const hintText = document.getElementById('hintText');
+    const returnBtn = document.getElementById('returnBtn');
     const particlesContainer = document.getElementById('particles');
 
-    // Tıklanınca Açılma / Kapanma
-    envelopeWrapper.addEventListener('click', (e) => {
-        if (e.target.closest('.action-zone')) return; // Butona tıklanınca zarf kapanmasın
-
-        envelopeWrapper.classList.toggle('open');
-        
-        if (envelopeWrapper.classList.contains('open')) {
-            hintText.style.display = 'none';
-        } else {
-            hintText.style.display = 'block';
-        }
+    envelopeWrapper.addEventListener('click', () => {
+        document.body.classList.add('invitation-open');
     });
 
-    // Hafif Parıltı Efekt Algoritması
+    returnBtn.addEventListener('click', () => {
+        document.body.classList.remove('invitation-open');
+    });
+
     function createParticle() {
-        if (!particlesContainer) return;
+        if (!particlesContainer || document.body.classList.contains('invitation-open')) return;
+
         const particle = document.createElement('div');
         particle.classList.add('particle');
-        
-        const size = Math.random() * 3 + 2; 
+
+        const size = Math.random() * 3 + 2;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         particle.style.left = `${Math.random() * 100}vw`;
-        
+
         const duration = Math.random() * 5 + 5;
         particle.style.animationDuration = `${duration}s`;
 
         particlesContainer.appendChild(particle);
-        setTimeout(() => { particle.remove(); }, duration * 1000);
+        setTimeout(() => {
+            particle.remove();
+        }, duration * 1000);
     }
-    setInterval(createParticle, 200);
+
+    setInterval(createParticle, 220);
 });
