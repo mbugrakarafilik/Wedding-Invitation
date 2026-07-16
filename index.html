@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mustafa & Büşra - Davetiye</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Pinyon+Script&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Buğra & Büşra - Düğün Davetiyesi</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Buğra & Büşra • Düğün Davetiyesi">
+    <meta property="og:description" content="23 Ağustos 2026 Pazar günü gerçekleşecek düğünümüzde sizleri de aramızda görmekten mutluluk duyarız.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,6 +23,7 @@
                     <span class="top-flap"></span>
                     <span class="side-flaps"></span>
                     <span class="front-flap"></span>
+                    <span class="gold-string" aria-hidden="true"></span>
                     <span class="bow-ribbon" aria-hidden="true"></span>
                     <span class="gold-seal"><span>B&B</span></span>
                 </span>
@@ -27,34 +33,85 @@
         </section>
 
         <section class="screen invitation-screen" aria-label="Düğün davetiyesi">
-            <div class="invitation-page">
-                <div class="corner-flower corner-flower-left"></div>
-                <div class="corner-flower corner-flower-right"></div>
+            <div class="invitation-scroll" id="invitationScroll">
+                <div class="white-velvet-wave white-velvet-wave-1"></div>
+                <div class="white-velvet-wave white-velvet-wave-2"></div>
+                <div class="pearl p1"></div>
+                <div class="pearl p2"></div>
+                <div class="pearl p3"></div>
+                <div class="pearl p4"></div>
+                <div class="pearl p5"></div>
+                <div class="pearl p6"></div>
 
-                <p class="eyebrow">Düğün Davetiyesi</p>
-                <h1 class="names">Mustafa & Büşra</h1>
-                <div class="divider">✦</div>
-
-                <p class="invitation-text">
-                    Birlikteliğimizi evlilikle taçlandıracağımız bu özel günde sizleri de aramızda görmekten mutluluk duyarız.
-                </p>
-
-                <div class="wedding-details" aria-label="Düğün detayları">
-                    <div class="detail-item">
-                        <span class="detail-label">Tarih</span>
-                        <span>23 Ağustos 2026</span>
+                <section class="page-section" aria-label="Davet bilgisi">
+                    <div class="card-wrapper">
+                        <article class="premium-card">
+                            <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
+                            <span class="inner-frame"></span>
+                            <div class="royal-crest">✦</div>
+                            <p class="premium-title">Düğün Davetiyesi</p>
+                            <h1 class="couple-names">Buğra <span class="ampersand">&</span> Büşra</h1>
+                            <div class="ornate-divider">❦</div>
+                            <p class="details">Hayatlarımızı birleştireceğimiz bu özel günde, sizleri de aramızda görmekten mutluluk duyarız.</p>
+                            <p class="date-box">23 AĞUSTOS 2026 • SAAT 19:00</p>
+                            <div class="countdown-container" aria-label="Düğüne kalan süre">
+                                <div class="countdown-box"><span class="countdown-number" id="days">00</span><span class="countdown-label">Gün</span></div>
+                                <div class="countdown-box"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Saat</span></div>
+                                <div class="countdown-box"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Dakika</span></div>
+                            </div>
+                            <button class="scroll-hint-down" type="button" data-scroll-next>Konum bilgisi için aşağı kaydırın ↓</button>
+                        </article>
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Saat</span>
-                        <span>19:00</span>
+                </section>
+
+                <section class="page-section" aria-label="Konum bilgileri">
+                    <div class="card-wrapper">
+                        <article class="premium-card">
+                            <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
+                            <span class="inner-frame"></span>
+                            <div class="royal-crest">⌖</div>
+                            <p class="premium-title">Ulaşım & Konum Bilgileri</p>
+                            <p class="address-text"><strong>Düğün Salonumuz</strong><br>Beyaz Bahçe Kır Düğün Salonu<br>Şehit Ömer Halis Demir Bulvarı No:142, Altındağ/Ankara</p>
+                            <div class="map-wrapper">
+                                <iframe title="Düğün konumu" src="https://www.google.com/maps?q=Beyaz%20Bah%C3%A7e%20D%C3%BC%C4%9F%C3%BCn%20Salonu%20Alt%C4%B1nda%C4%9F%20Ankara&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                            <div class="split-action-section">
+                                <div class="split-action-info">
+                                    <span class="action-title">Yol Tarifi Al</span>
+                                    <p class="action-desc">Navigasyon uygulamanız ile adrese kolayca ulaşmak için haritayı telefonunuzda açabilirsiniz.</p>
+                                </div>
+                                <a href="https://maps.google.com/?q=Beyaz%20Bah%C3%A7e%20D%C3%BC%C4%9F%C3%BCn%20Salonu%20Alt%C4%B1nda%C4%9F%20Ankara" target="_blank" rel="noopener noreferrer" class="premium-btn">Haritada Aç</a>
+                            </div>
+                            <button class="scroll-hint-down" type="button" data-scroll-next>Fotoğraflar için aşağı kaydırın ↓</button>
+                        </article>
                     </div>
-                </div>
+                </section>
 
-                <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="maps-btn">
-                    Haritada Gör
-                </a>
-
-                <button class="return-btn" id="returnBtn" type="button">Zarfa dön</button>
+                <section class="page-section" aria-label="Fotoğraf galerisi">
+                    <div class="card-wrapper">
+                        <article class="premium-card">
+                            <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
+                            <span class="inner-frame"></span>
+                            <div class="royal-crest">✨</div>
+                            <p class="premium-title">Mutluluğumuzdan Kareler</p>
+                            <div class="gallery-container">
+                                <div class="photo-frame">
+                                    <img src="images/photo-3.jpeg" alt="Fotoğraf 1" onerror="this.src='https://placehold.co/600x400/fffaf1/4a0209?text=Fotoğraf+1'">
+                                </div>
+                                <div class="photo-frame">
+                                    <img src="images/photo-2.jpg" alt="Fotoğraf 2" onerror="this.src='https://placehold.co/600x400/fffaf1/4a0209?text=Fotoğraf+2'">
+                                </div>
+                            </div>
+                            <div class="split-action-section">
+                                <div class="split-action-info">
+                                    <span class="action-title">Anılarınızı Bizimle Paylaşın</span>
+                                    <p class="action-desc">Düğün karelerinizi ortak albüm alanımıza yükleyebilirsiniz.</p>
+                                </div>
+                                <a href="https://photos.app.goo.gl/CWdweYAPSkmeGJVa7" target="_blank" rel="noopener noreferrer" class="premium-btn">Fotoğraf Yükle</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
             </div>
         </section>
     </main>

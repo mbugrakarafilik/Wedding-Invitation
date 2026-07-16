@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerçekçi Zarf Seçenekleri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px 16px 46px;
+            font-family: Montserrat, sans-serif;
+            color: #2f2924;
+            background: radial-gradient(circle at 50% 0%, #fffaf2 0%, #ebe2d5 70%, #d6c8b8 100%);
+        }
+        h1 { margin: 0; text-align: center; font-family: Cinzel, serif; color: #4a0209; font-size: clamp(1.45rem, 4vw, 2.35rem); }
+        .lead { max-width: 860px; margin: 10px auto 28px; text-align: center; color: #6f655b; line-height: 1.65; }
+        .grid { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 24px; }
+        .option { display: grid; gap: 10px; }
+        .label { font-family: Cinzel, serif; font-weight: 700; color: #4a0209; letter-spacing: .6px; }
+        .note { color: #6d6258; font-size: .86rem; line-height: 1.45; }
+        .stage { min-height: 260px; display: grid; place-items: center; padding: 28px; border-radius: 18px; background: rgba(255,255,255,.42); box-shadow: inset 0 0 0 1px rgba(255,255,255,.55); overflow: hidden; }
+
+        .env {
+            --paper1: #fffdf8;
+            --paper2: #ede3d5;
+            --paper3: #d5c6b5;
+            --line: rgba(105, 94, 84, .22);
+            --hi: rgba(255,255,255,.72);
+            --shadow: rgba(55, 43, 32, .18);
+            position: relative;
+            width: min(292px, 82vw);
+            aspect-ratio: 3 / 2;
+            border-radius: 6px;
+            filter: drop-shadow(0 20px 24px rgba(67, 52, 39, .24));
+            background: linear-gradient(145deg, var(--paper1), var(--paper2));
+            overflow: hidden;
+        }
+        .env::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(30deg, transparent 49.5%, var(--hi) 49.85%, var(--line) 50.25%, transparent 50.7%) left top / 50% 58% no-repeat,
+                linear-gradient(-30deg, transparent 49.5%, var(--hi) 49.85%, var(--line) 50.25%, transparent 50.7%) right top / 50% 58% no-repeat,
+                linear-gradient(150deg, transparent 49.4%, rgba(255,255,255,.42) 49.75%, var(--line) 50.2%, transparent 50.7%) left bottom / 50% 58% no-repeat,
+                linear-gradient(-150deg, transparent 49.4%, rgba(255,255,255,.38) 49.75%, var(--line) 50.2%, transparent 50.7%) right bottom / 50% 58% no-repeat;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .env::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.54), transparent 38%),
+                linear-gradient(180deg, transparent 68%, rgba(70,52,36,.13));
+            pointer-events: none;
+            z-index: 3;
+        }
+        .seal, .band, .string, .stamp, .label-card, .ribbon, .clip, .floral, .window, .texture, .monogram, .edge { position: absolute; z-index: 4; pointer-events: none; }
+        .seal {
+            left: 50%; top: 51%; transform: translate(-50%, -50%);
+            width: 54px; height: 54px; border-radius: 50%;
+            display: grid; place-items: center;
+            font: 700 .74rem/1 Cinzel, serif;
+            text-align: center;
+            color: #2e2108;
+            background: radial-gradient(circle at 32% 28%, #fff6d2, #d8ad50 55%, #8b6118 100%);
+            border: 1px solid rgba(97,62,15,.65);
+            box-shadow: 0 8px 16px rgba(42,25,8,.24), inset 2px 2px 5px rgba(255,255,255,.45), inset -3px -4px 8px rgba(70,40,8,.34);
+        }
+        .string::before, .string::after { content:""; position:absolute; left:50%; top:-20%; bottom:-20%; width:1px; background: linear-gradient(transparent, #d8b45d 18%, #fff0b7 50%, #9f7420 82%, transparent); box-shadow: 0 0 3px rgba(200,158,70,.35); }
+        .string::before { transform: rotate(24deg); }
+        .string::after { transform: rotate(-24deg); }
+
+        .o1 .env { --paper1:#fffdf8; --paper2:#ede3d5; --paper3:#d4c4b0; }
+        .o1 .seal { display: none; }
+
+        .o2 .env { --paper1:#fffaf1; --paper2:#e8d9c5; --line:rgba(113,91,66,.24); }
+        .o2 .seal { width:50px; height:50px; }
+
+        .o3 .env { --paper1:#f8f4ec; --paper2:#d8c9b5; border-radius: 4px; }
+        .o3 .band { left:-4%; right:-4%; top:50%; height:22px; transform:translateY(-50%); background: linear-gradient(#efe5d6,#d0bda4); box-shadow: inset 0 1px rgba(255,255,255,.55), 0 5px 10px rgba(80,60,42,.13); }
+
+        .o4 .env { --paper1:#ffffff; --paper2:#e8edf1; --line:rgba(92,105,115,.22); }
+        .o4 .texture { inset:0; background: repeating-linear-gradient(112deg, rgba(120,135,145,.07) 0 1px, transparent 1px 9px); }
+
+        .o5 .env { --paper1:#eee4dc; --paper2:#cdb9a9; --line:rgba(82,60,47,.2); }
+        .o5 .ribbon { left:-5%; right:-5%; top:52%; height:28px; transform:translateY(-50%); background: linear-gradient(#f4d2ca,#c98f86); border-top:1px solid rgba(255,255,255,.34); }
+        .o5 .seal { background: radial-gradient(circle at 32% 28%, #fff2df, #c98f86 62%, #8b514a); color:#3c1d19; }
+
+        .o6 .env { --paper1:#f2f0ea; --paper2:#c7c2ba; --line:rgba(80,80,76,.22); }
+        .o6 .edge { inset:10px; border:1px solid rgba(255,255,255,.62); border-radius:4px; box-shadow: inset 0 0 0 1px rgba(90,85,78,.08); }
+
+        .o7 .env { --paper1:#fff9ed; --paper2:#e6cfa4; --line:rgba(129,92,34,.24); }
+        .o7 .stamp { right:18px; top:18px; width:46px; height:36px; border:1px solid rgba(130,93,35,.45); border-radius:4px; background: rgba(255,255,255,.25); }
+        .o7 .stamp::before { content:""; position:absolute; inset:7px; border:1px dashed rgba(130,93,35,.35); border-radius:3px; }
+
+        .o8 .env { --paper1:#fffdf8; --paper2:#dfd4c6; }
+        .o8 .label-card { left:50%; top:50%; transform:translate(-50%,-50%); width:112px; height:58px; border-radius:5px; background:rgba(255,255,255,.62); border:1px solid rgba(150,135,120,.28); box-shadow:0 6px 12px rgba(80,60,42,.1); }
+        .o8 .label-card::before { content:"B & B"; position:absolute; inset:0; display:grid; place-items:center; font:700 1rem Cinzel,serif; color:#4a0209; }
+
+        .o9 .env { --paper1:#fbf4e8; --paper2:#d9c090; --line:rgba(115,83,26,.23); }
+        .o9 .edge { inset:0; background: linear-gradient(90deg,#b38938 50%,transparent 0) top/12px 2px repeat-x, linear-gradient(#b38938 50%,transparent 0) left/2px 12px repeat-y, linear-gradient(90deg,#b38938 50%,transparent 0) bottom/12px 2px repeat-x, linear-gradient(#b38938 50%,transparent 0) right/2px 12px repeat-y; opacity:.45; }
+
+        .o10 .env { --paper1:#fff; --paper2:#eee8df; border-radius:18px; }
+        .o10 .env::before { background: linear-gradient(30deg, transparent 49.5%, var(--line) 50.25%, transparent 50.7%) left top/50% 54% no-repeat, linear-gradient(-30deg, transparent 49.5%, var(--line) 50.25%, transparent 50.7%) right top/50% 54% no-repeat; }
+        .o10 .clip { left:50%; top:9px; width:110px; height:62px; transform:translateX(-50%); border:1px solid rgba(150,135,120,.34); border-top:0; border-radius:0 0 60px 60px; background:linear-gradient(#fff,#e8ded0); box-shadow:0 5px 10px rgba(80,60,42,.1); }
+
+        .o11 .env { --paper1:#faf7f1; --paper2:#ded5ca; }
+        .o11 .floral { left:18px; bottom:16px; width:92px; height:58px; background: radial-gradient(ellipse at 18% 60%, #b8c3a7 0 6px, transparent 7px), radial-gradient(ellipse at 38% 42%, #c98f86 0 5px, transparent 6px), radial-gradient(ellipse at 58% 62%, #b8c3a7 0 5px, transparent 6px), linear-gradient(25deg, transparent 48%, rgba(127,148,117,.65) 49% 51%, transparent 52%); opacity:.55; }
+
+        .o12 .env { --paper1:#7a1731; --paper2:#2f0d1a; --line:rgba(255,220,160,.18); border-color: rgba(223,183,108,.35); }
+        .o12 .string { inset:-10px; }
+        .o12 .seal { background: radial-gradient(circle at 32% 28%, #fff6cb, #d4a84a 58%, #7b5214); }
+
+        .o13 .env { --paper1:#f9f1e5; --paper2:#d0bca0; }
+        .o13 .window { left:34px; top:28px; width:112px; height:62px; background:rgba(255,255,255,.55); border:1px solid rgba(150,130,100,.26); border-radius:4px; box-shadow:inset 0 0 12px rgba(255,255,255,.5); }
+        .o13 .window::before { content:"Buğra & Büşra"; position:absolute; inset:0; display:grid; place-items:center; font:700 .72rem Cinzel,serif; color:#6f5840; }
+
+        .o14 .env { --paper1:#fffdf8; --paper2:#e4d9ca; }
+        .o14 .monogram { left:50%; top:50%; transform:translate(-50%,-50%); font:700 2rem Cinzel,serif; color:rgba(74,2,9,.2); letter-spacing:4px; }
+        .o14 .monogram::before { content:"B&B"; }
+
+        .o15 .env { --paper1:#f7efe5; --paper2:#d9cabb; }
+        .o15 .band { left:0; right:0; bottom:0; height:42%; background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(200,185,170,.18)); border-top:1px solid rgba(120,105,90,.18); }
+
+        .o16 .env { --paper1:#fff; --paper2:#e9e2d8; }
+        .o16 .ribbon { left:50%; top:-5%; bottom:-5%; width:24px; transform:translateX(-50%); background:linear-gradient(90deg,#7b0f20,#b21d35,#70101f); }
+        .o16 .seal { background: radial-gradient(circle,#b61c2d,#74101e); color:#f8e5c0; border-color:#5d0b15; }
+
+        .o17 .env { --paper1:#f6f2ea; --paper2:#cfc4b8; }
+        .o17 .texture { inset:0; opacity:.45; background: radial-gradient(ellipse at 30% 20%,rgba(130,120,110,.15),transparent 30%), radial-gradient(ellipse at 70% 80%,rgba(120,110,100,.13),transparent 34%), linear-gradient(120deg,transparent 0 44%,rgba(160,150,140,.12) 45%,transparent 46% 100%); }
+
+        .o18 .env { --paper1:#fffbf4; --paper2:#eadfcf; }
+        .o18 .band { left:-5%; right:-5%; top:51%; height:30px; transform:translateY(-50%) rotate(-10deg); background:linear-gradient(90deg,#ead8b8,#fff6e4,#d9bb7d); border-top:1px solid #c09d57; border-bottom:1px solid #c09d57; }
+        .o18 .seal { background: radial-gradient(circle,#fff6d8,#c99b38); }
+
+        .o19 .env { --paper1:#fcfaf6; --paper2:#e4ded6; }
+        .o19 .env::before { background: linear-gradient(30deg, transparent 49.5%, rgba(110,100,90,.16) 50.25%, transparent 50.7%) left top/50% 58% no-repeat, linear-gradient(-30deg, transparent 49.5%, rgba(110,100,90,.16) 50.25%, transparent 50.7%) right top/50% 58% no-repeat; }
+        .o19 .floral { right:16px; top:18px; width:72px; height:72px; background: radial-gradient(ellipse at 25% 45%,#d4c2ae 0 5px,transparent 6px), radial-gradient(ellipse at 52% 30%,#b7c5aa 0 5px,transparent 6px), linear-gradient(130deg,transparent 48%,rgba(127,148,117,.55) 49% 51%,transparent 52%); opacity:.5; }
+
+        .o20 .env { --paper1:#fff7ec; --paper2:#ddc3a4; }
+        .o20 .seal { display:none; }
+        .o20 .string { inset:-10px; }
+    </style>
+</head>
+<body>
+    <h1>Gerçekçi Zarf Seçenekleri</h1>
+    <p class="lead">Bu sayfadaki seçenekler süslü illüstrasyon değil, giriş ekranına CSS/HTML olarak doğrudan uygulanabilecek daha sade ve gerçekçi zarf prototipleri. Bir numara seç, onu ana zarfa giydireyim.</p>
+    <div class="grid">
+        <div class="option o1"><div class="label">1. Sade Fildişi Zarf</div><div class="stage"><div class="env"></div></div><div class="note">En gerçekçi ve minimal seçenek. Sadece kağıt kat çizgileri.</div></div>
+        <div class="option o2"><div class="label">2. Fildişi + Altın Mühür</div><div class="stage"><div class="env"><span class="seal">B&B</span></div></div><div class="note">Klasik düğün zarfı. Sade ama tören hissi var.</div></div>
+        <div class="option o3"><div class="label">3. Krem Saten Bant</div><div class="stage"><div class="env"><span class="band"></span></div></div><div class="note">Şerit var ama gerçekçi ve düşük kontrastlı.</div></div>
+        <div class="option o4"><div class="label">4. Soğuk Beyaz Kağıt</div><div class="stage"><div class="env"><span class="texture"></span></div></div><div class="note">Temiz, modern, hafif gri kağıt dokulu.</div></div>
+        <div class="option o5"><div class="label">5. Blush Kurdele + Mühür</div><div class="stage"><div class="env"><span class="ribbon"></span><span class="seal">B&B</span></div></div><div class="note">Romantik ama abartısız pudra ton.</div></div>
+        <div class="option o6"><div class="label">6. Taş Rengi Minimal</div><div class="stage"><div class="env"><span class="edge"></span></div></div><div class="note">Doğal kağıt ve sade iç kenar hissi.</div></div>
+        <div class="option o7"><div class="label">7. Vintage Pul Detaylı</div><div class="stage"><div class="env"><span class="stamp"></span></div></div><div class="note">Gerçek posta zarfı gibi, nostaljik.</div></div>
+        <div class="option o8"><div class="label">8. Orta Etiketli Zarf</div><div class="stage"><div class="env"><span class="label-card"></span></div></div><div class="note">Üzerinde küçük isim kartı olan sade zarf.</div></div>
+        <div class="option o9"><div class="label">9. Kraft Vintage Kenarlı</div><div class="stage"><div class="env"><span class="edge"></span></div></div><div class="note">Eski mektup hissi, sıcak ve doğal.</div></div>
+        <div class="option o10"><div class="label">10. Yuvarlak Cep Kapak</div><div class="stage"><div class="env"><span class="clip"></span></div></div><div class="note">Butik davetiye zarfı gibi, farklı ama sade.</div></div>
+        <div class="option o11"><div class="label">11. Sol Alt Botanik Detay</div><div class="stage"><div class="env"><span class="floral"></span></div></div><div class="note">Küçük yaprak detayı, zarfı boğmaz.</div></div>
+        <div class="option o12"><div class="label">12. Bordo Kadife Gerçekçi</div><div class="stage"><div class="env"><span class="string"></span><span class="seal">B&B</span></div></div><div class="note">Koyu zarf sevenler için ama kat çizgileri sade.</div></div>
+        <div class="option o13"><div class="label">13. Pencereli Zarf</div><div class="stage"><div class="env"><span class="window"></span></div></div><div class="note">İsim alanı zarfın içinden görünür gibi.</div></div>
+        <div class="option o14"><div class="label">14. Soluk Monogram Baskı</div><div class="stage"><div class="env"><span class="monogram"></span></div></div><div class="note">Mühür yok; kağıda basılmış monogram hissi.</div></div>
+        <div class="option o15"><div class="label">15. Alt Cep Gölgeli</div><div class="stage"><div class="env"><span class="band"></span></div></div><div class="note">Alt cep kısmı hafif belli, gerçek zarf gibi.</div></div>
+        <div class="option o16"><div class="label">16. Bordo Dikey Bant</div><div class="stage"><div class="env"><span class="ribbon"></span><span class="seal">B&B</span></div></div><div class="note">Krem zarf üstünde güçlü ama temiz vurgu.</div></div>
+        <div class="option o17"><div class="label">17. Mermerimsi Kağıt</div><div class="stage"><div class="env"><span class="texture"></span></div></div><div class="note">Hafif yüzey dokulu, modern ve zarif.</div></div>
+        <div class="option o18"><div class="label">18. Diyagonal Altın Kuşak</div><div class="stage"><div class="env"><span class="band"></span><span class="seal">B&B</span></div></div><div class="note">Biraz daha tasarımlı ama hâlâ zarf gibi.</div></div>
+        <div class="option o19"><div class="label">19. Sağ Üst Küçük Botanik</div><div class="stage"><div class="env"><span class="floral"></span></div></div><div class="note">Çok hafif süs, zarf yüzeyini sade bırakır.</div></div>
+        <div class="option o20"><div class="label">20. Altın İpli Sade Krem</div><div class="stage"><div class="env"><span class="string"></span></div></div><div class="note">Mühürsüz, sadece ince ipli gerçekçi zarf.</div></div>
+    </div>
+</body>
+</html>

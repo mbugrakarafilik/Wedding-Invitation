@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Köşe Tasarım Seçenekleri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Montserrat, sans-serif;
+            background: radial-gradient(circle at top, #fffaf1, #e8ded0 70%);
+            color: #2d2520;
+            padding: 32px 18px;
+        }
+        h1 {
+            margin: 0 auto 8px;
+            text-align: center;
+            font-family: Cinzel, serif;
+            font-size: clamp(1.4rem, 4vw, 2.3rem);
+            color: #4a0209;
+        }
+        .lead {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 28px;
+            color: #6f665d;
+            line-height: 1.6;
+        }
+        .grid {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+        .option {
+            display: grid;
+            gap: 10px;
+        }
+        .label {
+            font-family: Cinzel, serif;
+            font-weight: 700;
+            color: #4a0209;
+            letter-spacing: 1px;
+        }
+        .card {
+            position: relative;
+            min-height: 330px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 48px 32px;
+            background: rgba(255,255,255,.86);
+            border: 1px solid rgba(179,137,56,.35);
+            box-shadow: 0 18px 46px rgba(84,69,52,.13);
+            overflow: hidden;
+        }
+        .card h2 {
+            margin: 0;
+            font-family: Cinzel, serif;
+            color: #4a0209;
+            font-size: 1.45rem;
+        }
+        .card p { max-width: 230px; margin: 12px auto 0; line-height: 1.6; color: #62584f; font-size: .9rem; }
+        .corner, .corner::before, .corner::after { position: absolute; content: ""; pointer-events: none; }
+        .tl { top: 18px; left: 18px; }
+        .tr { top: 18px; right: 18px; transform: scaleX(-1); }
+        .bl { bottom: 18px; left: 18px; transform: scaleY(-1); }
+        .br { bottom: 18px; right: 18px; transform: scale(-1); }
+
+        .o1 .card { border-radius: 18px 18px 38px 18px; }
+        .o1 .corner { width: 76px; height: 76px; border-top: 1px solid #b38938; border-left: 1px solid #b38938; border-top-left-radius: 18px; opacity: .72; }
+        .o1 .corner::before { width: 42px; height: 42px; left: 13px; top: 13px; border-top: 1px solid rgba(179,137,56,.55); border-left: 1px solid rgba(179,137,56,.55); border-top-left-radius: 14px; }
+        .o1 .corner::after { width: 5px; height: 5px; left: 29px; top: 29px; border-radius: 50%; background: #b38938; box-shadow: 14px 0 rgba(179,137,56,.35), 0 14px rgba(179,137,56,.35); }
+
+        .o2 .card { border-radius: 10px; background: #fffdf8; }
+        .o2 .corner { width: 112px; height: 112px; opacity: .8; background: no-repeat center/contain url("data:image/svg+xml,%3Csvg width='112' height='112' viewBox='0 0 112 112' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M14 88 C28 60 52 40 89 28' stroke='%23b38938' stroke-width='1.3'/%3E%3Cpath d='M32 67 C24 63 21 56 23 49 C32 51 36 58 32 67Z' fill='%23f4e4df' stroke='%23c98f86'/%3E%3Cpath d='M57 46 C50 40 50 33 55 27 C62 34 63 40 57 46Z' fill='%23edf3e8' stroke='%237f9475'/%3E%3Cpath d='M44 56 C52 47 61 42 73 40' stroke='%237f9475' stroke-width='1'/%3E%3Ccircle cx='87' cy='29' r='2.4' fill='%23dfb76c'/%3E%3C/g%3E%3C/svg%3E"); }
+
+        .o3 .card { border: 0; border-radius: 22px; background: linear-gradient(#fff, #fffaf2); }
+        .o3 .card::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(179,137,56,.35); border-radius: 18px; }
+        .o3 .corner { width: 88px; height: 88px; }
+        .o3 .corner::before { inset: 0; border-top: 8px double rgba(179,137,56,.72); border-left: 8px double rgba(179,137,56,.72); border-top-left-radius: 22px; }
+        .o3 .corner::after { width: 34px; height: 34px; left: 20px; top: 20px; border-top: 1px solid rgba(74,2,9,.35); border-left: 1px solid rgba(74,2,9,.35); border-top-left-radius: 14px; }
+
+        .o4 .card { border-radius: 28px 8px 28px 8px; border-color: rgba(127,148,117,.45); }
+        .o4 .corner { width: 120px; height: 72px; opacity: .78; background: no-repeat center/contain url("data:image/svg+xml,%3Csvg width='120' height='72' viewBox='0 0 120 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 60 C34 46 46 28 50 8' stroke='%237f9475' stroke-width='1.4'/%3E%3Cpath d='M50 8 C60 24 75 34 100 36' stroke='%23b38938' stroke-width='1.1'/%3E%3Cpath d='M25 49 C19 41 20 34 27 29 C34 38 32 45 25 49Z' fill='%23eef3e7' stroke='%237f9475'/%3E%3Cpath d='M49 18 C42 14 39 7 42 1 C50 5 52 11 49 18Z' fill='%23eef3e7' stroke='%237f9475'/%3E%3Cpath d='M73 30 C69 22 72 16 79 13 C84 22 81 28 73 30Z' fill='%23f4e4df' stroke='%23c98f86'/%3E%3C/g%3E%3C/svg%3E"); }
+
+        .o5 .card { border-radius: 6px; background: #fff; }
+        .o5 .card::before { content:""; position:absolute; inset:18px; border: 1px solid rgba(179,137,56,.3); }
+        .o5 .corner { width: 92px; height: 92px; }
+        .o5 .corner::before { inset: 0; background: conic-gradient(from 270deg at 18px 18px, rgba(179,137,56,.75) 0 18deg, transparent 18deg 72deg, rgba(179,137,56,.55) 72deg 90deg, transparent 90deg); }
+        .o5 .corner::after { width: 54px; height: 1px; left: 16px; top: 16px; background: #b38938; box-shadow: 0 12px rgba(179,137,56,.28), 0 24px rgba(179,137,56,.18); transform: rotate(-28deg); transform-origin: left center; }
+
+        .o6 .card { border-radius: 18px; background: linear-gradient(180deg, #ffffff, #fff8ed); }
+        .o6 .corner { width: 86px; height: 86px; border-top: 1px solid rgba(74,2,9,.35); border-left: 1px solid rgba(74,2,9,.35); }
+        .o6 .corner::before { width: 70px; height: 70px; left: 10px; top: 10px; border-top: 1px solid rgba(179,137,56,.7); border-left: 1px solid rgba(179,137,56,.7); border-top-left-radius: 50px; }
+        .o6 .corner::after { width: 26px; height: 26px; left: 26px; top: 26px; border: 1px solid rgba(179,137,56,.5); border-right: 0; border-bottom: 0; border-radius: 18px 0 0 0; }
+    </style>
+</head>
+<body>
+    <h1>Köşe Tasarım Seçenekleri</h1>
+    <p class="lead">Beğendiğin seçeneğin numarasını söyle; aynı köşe stilini ana davetiye kartlarına uygularım.</p>
+    <div class="grid">
+        <div class="option o1"><div class="label">1. Minimal Altın Noktalı</div><div class="card"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div><h2>Buğra & Büşra</h2><p>Sade, temiz ve premium. En risksiz seçenek.</p></div></div></div>
+        <div class="option o2"><div class="label">2. İnce Botanik Çizgi</div><div class="card"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div><h2>Buğra & Büşra</h2><p>Narin yaprak ve küçük çiçeklerle romantik görünür.</p></div></div></div>
+        <div class="option o3"><div class="label">3. Klasik Double Border</div><div class="card"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div><h2>Buğra & Büşra</h2><p>Daha resmi, davetiye baskısı gibi net durur.</p></div></div></div>
+        <div class="option o4"><div class="label">4. Eucalyptus Soft</div><div class="card"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div><h2>Buğra & Büşra</h2><p>Yeşil yaprak ağırlıklı, modern ve doğal.</p></div></div></div>
+        <div class="option o5"><div class="label">5. Art Deco İnce Altın</div><div class="card"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div><h2>Buğra & Büşra</h2><p>Geometrik, şık ve daha salon düğünü havasında.</p></div></div></div>
+        <div class="option o6"><div class="label">6. Kavisli Monogram Çerçeve</div><div class="card"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div><h2>Buğra & Büşra</h2><p>Yumuşak kıvrımlı, klasik ama farklı.</p></div></div></div>
+    </div>
+</body>
+</html>
